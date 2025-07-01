@@ -8,6 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -17,7 +18,7 @@ jobs:
         with:
           node-version: "20.18.0"
 
-      - name: Cache node modules
+      - name: Cache node_modules
         uses: actions/cache@v3
         with:
           path: ~/.npm
@@ -30,10 +31,8 @@ jobs:
 
       - name: Build Project
         run: npm run build
-        env:
-          SKIP_LINT: true # 👈 Disables linting during build
 
-      # Optional: run lint manually if needed
+      # Optional: Skip linting unless required for production stability
       # - name: Run Lint
       #   run: npm run lint
 
@@ -42,5 +41,5 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Run Deployment Scripts
+      - name: Run Deployment Script
         run: bash .scripts/deploy.sh

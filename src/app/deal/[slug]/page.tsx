@@ -1,3 +1,5 @@
+// src/app/deal/[slug]/page.tsx
+
 import { getDealBySlug, HOMEPAGE_ALL_SECTIONS_QUERY } from "@/lib/queries";
 import { request } from "graphql-request";
 import { notFound } from "next/navigation";
@@ -23,19 +25,17 @@ type ThemeOptions = {
 
 interface GraphQLResponse {
   acfOptionsThemeOptions: {
-    ThemeOptions: {
-      headerBackground?: { sourceUrl: string };
-      headerLogo?: { sourceUrl: string; title?: string };
-      headerSlogan?: string;
-    };
+    ThemeOptions: ThemeOptions;
   };
 }
 
-export default async function DealPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+interface DealPageProps {
+  params: {
+    slug: string;
+  };
+}
+
+export default async function DealPage({ params }: DealPageProps) {
   const headerMenu = await getHeaderMenu();
 
   const deal = await getDealBySlug(params.slug);
@@ -46,7 +46,6 @@ export default async function DealPage({
     HOMEPAGE_ALL_SECTIONS_QUERY
   );
   const themeOptions = themeData.acfOptionsThemeOptions?.ThemeOptions || {};
-
   const d = deal.dealsHomepage;
 
   return (
@@ -80,12 +79,10 @@ export default async function DealPage({
       </main>
 
       <Services d={deal.servicesSection} dealsHomepage={deal.dealsHomepage} />
-
       <PricingPackage
         d={deal.pricingPackageSection}
         dealsHomepage={deal.dealsHomepage}
       />
-
       <BeforeAfter
         d={deal.beforeAfterSection}
         dealsHomepage={deal.dealsHomepage}
@@ -94,7 +91,6 @@ export default async function DealPage({
         d={deal.photoGallerySection}
         dealsHomepage={deal.dealsHomepage}
       />
-
       <VideoGallery
         d={deal.videoGallerySection}
         dealsHomepage={deal.dealsHomepage}
@@ -103,7 +99,6 @@ export default async function DealPage({
         d={deal.beautyProductsSection}
         dealsHomepage={deal.dealsHomepage}
       />
-
       <GetInTouch
         d={deal.contactUsSection}
         dealsHomepage={deal.dealsHomepage}
