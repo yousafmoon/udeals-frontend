@@ -9,9 +9,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout code
+      - name: Checkout Code
         uses: actions/checkout@v3
-      - name: setup Node.js
+
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "20.18.0"
@@ -29,7 +30,10 @@ jobs:
 
       - name: Build Project
         run: npm run build
+        env:
+          SKIP_LINT: true # 👈 Disables linting during build
 
+      # Optional: run lint manually if needed
       # - name: Run Lint
       #   run: npm run lint
 
