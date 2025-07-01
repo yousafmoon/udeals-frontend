@@ -12,9 +12,13 @@ type ThemeOptions = {
 };
 
 interface GraphQLResponse {
-  [x: string]: any;
   acfOptionsThemeOptions: {
     ThemeOptions: ThemeOptions;
+  };
+  termsPage?: {
+    homepageTermsPageFields?: {
+      termsPageContent?: string;
+    };
   };
 }
 

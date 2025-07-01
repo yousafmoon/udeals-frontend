@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig: import('next').NextConfig = {
+   eslint: {
+    ignoreDuringBuilds: process.env.SKIP_LINT === 'true',
+  },
   images: {
   remotePatterns: [
     {

@@ -16,11 +16,22 @@ jobs:
         with:
           node-version: "20.18.0"
 
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Install Dependencies
         run: npm install
 
       - name: Build Project
         run: npm run build
+
+      # - name: Run Lint
+      #   run: npm run lint
 
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.5.4
