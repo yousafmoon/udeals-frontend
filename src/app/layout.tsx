@@ -5,6 +5,7 @@ import { getFooterMenu } from "@/lib/getFooterMenu";
 import { request } from "graphql-request";
 import { HOMEPAGE_ALL_SECTIONS_QUERY } from "@/lib/queries";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
+import { Suspense } from "react";
 
 import {
   Montserrat,
@@ -76,7 +77,6 @@ export const metadata: Metadata = {
   },
 };
 
-// --- Type Definitions ---
 type ThemeOptions = {
   headerBackground?: { sourceUrl: string };
   headerLogo?: { sourceUrl: string; title?: string };
@@ -114,7 +114,7 @@ export default async function RootLayout({
       <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
       <body>
-        {children}
+        <Suspense fallback={<div>Loading page...</div>}>{children}</Suspense>
         <ScrollToTopButton />
         <Footer options={themeOptions} menuItems={footerMenu} />
       </body>
