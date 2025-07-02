@@ -24,8 +24,16 @@ interface DealServicesProps {
 }
 
 export default function DealServices({ services = [] }: DealServicesProps) {
-  const filteredServices = services.filter(
-    (term) => term.dealServices?.showOnHomepage === true
+  const normalizedServices = services.map((term) => ({
+    ...term,
+    dealServices: {
+      ...term.dealServices,
+      showOnHomepage: !!term.dealServices?.showOnHomepage,
+    },
+  }));
+
+  const filteredServices = normalizedServices.filter(
+    (term) => term.dealServices.showOnHomepage === true
   );
 
   return (

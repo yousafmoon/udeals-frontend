@@ -136,7 +136,7 @@ export const HOMEPAGE_ALL_SECTIONS_QUERY = `
       }
     }
 
-    dealServices {
+   dealServices(first: 100) {
       nodes {
         id
         name
