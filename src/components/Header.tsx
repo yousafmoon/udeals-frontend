@@ -61,7 +61,7 @@ export default function Header({
       };
       loadMenu();
     }
-  }, [isProfile]);
+  }, [isProfile, isGeneral]);
 
   const scrollToAbout = () => {
     const el = document.getElementById("about-us");

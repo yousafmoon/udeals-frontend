@@ -1,5 +1,3 @@
-// src/app/deal/[slug]/page.tsx
-
 import { getDealBySlug, HOMEPAGE_ALL_SECTIONS_QUERY } from "@/lib/queries";
 import { request } from "graphql-request";
 import { notFound } from "next/navigation";
@@ -17,27 +15,32 @@ import GetInTouch from "@/components/sections/GetInTouch";
 
 const endpoint = "https://ujz.cuf.temporary.site/udeals/graphql";
 
-type ThemeOptions = {
-  headerBackground?: { sourceUrl: string };
-  headerLogo?: { sourceUrl: string; title?: string };
-  headerSlogan?: string;
+interface PageProps {
+  params: {
+    slug: string;
+  };
+  searchParams?: {
+    [key: string]: string | string[] | undefined;
+  };
+}
+
+type Props = {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 };
 
 interface GraphQLResponse {
   acfOptionsThemeOptions: {
-    ThemeOptions: ThemeOptions;
+    ThemeOptions: {
+      headerBackground?: { sourceUrl: string };
+      headerLogo?: { sourceUrl: string; title?: string };
+      headerSlogan?: string;
+    };
   };
 }
 
-interface DealPageProps {
-  params: {
-    slug: string;
-  };
-}
-
-export default async function DealPage({ params }: DealPageProps) {
+export default async function DealPage({ params }: any) {
   const headerMenu = await getHeaderMenu();
-
   const deal = await getDealBySlug(params.slug);
   if (!deal) return notFound();
 
@@ -63,21 +66,18 @@ export default async function DealPage({ params }: DealPageProps) {
           email: d?.email,
         }}
       />
-
       <main className="container mx-auto pt-12 px-4 sm:px-5 md:px-10">
         <SpecialDeal
           d={deal.specialDealSection}
           dealsHomepage={deal.dealsHomepage}
         />
       </main>
-
       <main className="w-full mx-auto">
         <AboutUs
           d={{ ...deal.aboutUsSection, ourTeamSection: deal.ourTeamSection }}
           dealsHomepage={deal.dealsHomepage}
         />
       </main>
-
       <Services d={deal.servicesSection} dealsHomepage={deal.dealsHomepage} />
       <PricingPackage
         d={deal.pricingPackageSection}

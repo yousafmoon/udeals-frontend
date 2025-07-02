@@ -6,13 +6,12 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "export": "next export",
     "lint": "next lint"
   },
   "dependencies": {
     "clsx": "^2.1.1",
     "graphql-request": "^7.2.0",
-    "next": "15.3.3",
+    "next": "^15.3.4",
     "nodemailer": "^7.0.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

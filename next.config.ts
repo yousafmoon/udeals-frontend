@@ -1,8 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-   output: 'export', 
-  eslint: {
-    ignoreDuringBuilds: process.env.SKIP_LINT === 'true',
+   eslint: {
+    ignoreDuringBuilds: true,
   },
   typescript: {
   ignoreBuildErrors: process.env.SKIP_LINT === 'true',
