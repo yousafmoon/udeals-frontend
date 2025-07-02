@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
+import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 
 export default function DealsVideoGrid({ dealCategories }) {
   const [activeVideo, setActiveVideo] = useState(null);
@@ -38,16 +38,24 @@ export default function DealsVideoGrid({ dealCategories }) {
             {/* View All Button */}
             <div className="text-center mt-6 container px-4 sm:px-6 md:px-10 mx-auto">
               <a
-                href={category.dealCategorySettings?.viewAllUrl || `/search?service=${category.slug}`}
+                href={`${
+                  category.dealCategorySettings?.viewAllUrl ||
+                  `/search?service=${category.slug}`
+                }`}
                 onClick={() => {
-                  if (typeof window !== 'undefined') {
+                  if (typeof window !== "undefined") {
                     sessionStorage.setItem("scrollToResults", "true");
                   }
                 }}
                 className="inline-flex items-center gap-2 bg-white text-sm sm:text-md px-5 sm:px-6 py-3 sm:py-4 text-black hover:bg-opacity-90 transition font-poppins"
               >
-                {category.dealCategorySettings?.viewAllButton || `View All ${category.name}`}
-                <img src="/icons/arrow_forward.svg" alt="forward" className="w-5 h-5" />
+                {category.dealCategorySettings?.viewAllButton ||
+                  `View All ${category.name}`}
+                <img
+                  src="/icons/arrow_forward.svg"
+                  alt="forward"
+                  className="w-5 h-5"
+                />
               </a>
             </div>
           </div>
@@ -57,7 +65,15 @@ export default function DealsVideoGrid({ dealCategories }) {
   );
 }
 
-function VideoCard({ videoUrl, title, description, posterUrl, id, activeVideo, setActiveVideo }) {
+function VideoCard({
+  videoUrl,
+  title,
+  description,
+  posterUrl,
+  id,
+  activeVideo,
+  setActiveVideo,
+}) {
   const videoRef = useRef(null);
   const [hasHovered, setHasHovered] = useState(false);
   const [hasMounted, setHasMounted] = useState(false);
@@ -86,10 +102,7 @@ function VideoCard({ videoUrl, title, description, posterUrl, id, activeVideo, s
   const togglePlayback = () => setActiveVideo(isActive ? null : id);
 
   const showIcon =
-    !hasMounted ||
-    isActive ||
-    hasHovered ||
-    (!isActive && !hasPlayedOnce);
+    !hasMounted || isActive || hasHovered || (!isActive && !hasPlayedOnce);
 
   return (
     <div className="relative mb-4">
@@ -111,12 +124,16 @@ function VideoCard({ videoUrl, title, description, posterUrl, id, activeVideo, s
           <button
             type="button"
             className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 pointer-events-none ${
-              showIcon ? 'opacity-100' : 'opacity-0'
+              showIcon ? "opacity-100" : "opacity-0"
             }`}
           >
             <Image
-              src={isActive ? '/icons/pause-black.svg' : '/icons/video-black-icon.svg'}
-              alt={isActive ? 'Pause' : 'Play'}
+              src={
+                isActive
+                  ? "/icons/pause-black.svg"
+                  : "/icons/video-black-icon.svg"
+              }
+              alt={isActive ? "Pause" : "Play"}
               width={40}
               height={40}
               className="opacity-90"
@@ -127,7 +144,9 @@ function VideoCard({ videoUrl, title, description, posterUrl, id, activeVideo, s
         <p className="text-sm text-red-500 mb-2">No video available</p>
       )}
 
-      <h3 className="text-base sm:text-lg font-extrabold font-lato text-black mt-3">{title}</h3>
+      <h3 className="text-base sm:text-lg font-extrabold font-lato text-black mt-3">
+        {title}
+      </h3>
       <p className="text-sm sm:text-base text-black mt-1">{description}</p>
     </div>
   );
