@@ -74,8 +74,8 @@ export default function Footer({ options, menuItems = [] }: FooterProps) {
                     src={options.footerLogo.sourceUrl}
                     alt={options.footerLogo.title || "Footer Logo"}
                     width={420}
-                    height={40}
-                    className="h-[40px] w-[420px] cursor-pointer"
+                    height={70}
+                    className="h-[70px] w-[420px] cursor-pointer"
                   />
                 </Link>
               </div>
