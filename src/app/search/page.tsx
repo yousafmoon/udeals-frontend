@@ -9,6 +9,7 @@ import Header from "@/components/Header";
 import ListingsControls from "@/components/ListingsControls";
 import { request } from "graphql-request";
 import { HOMEPAGE_ALL_SECTIONS_QUERY } from "@/lib/queries";
+import { useLayoutEffect } from "react";
 
 const endpoint = "https://ujz.cuf.temporary.site/udeals/graphql";
 
@@ -137,20 +138,18 @@ export default function SearchPage() {
     fetchSearchAndBanners();
   }, [urlSearch, urlLocation, urlService]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (
       typeof window !== "undefined" &&
       sessionStorage.getItem("scrollToResults") === "true"
     ) {
       sessionStorage.removeItem("scrollToResults");
-      setTimeout(() => {
-        resultsRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }, 300);
+      resultsRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
     }
-  }, []);
+  }, [filteredDeals]);
 
   useEffect(() => {
     async function fetchGraphQLData() {
