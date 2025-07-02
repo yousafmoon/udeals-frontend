@@ -120,7 +120,7 @@ export default function HomepageDealsSection({ dealCategories }) {
             <a
               href={
                 category.dealCategorySettings?.viewAllUrl ||
-                `/search?service=${category.slug}`
+                `/search?service=${category.slug}#results`
               }
               className="inline-flex items-center gap-2 text-sm sm:text-md px-6 py-3 sm:py-4 view-all-button-bg text-black hover:bg-opacity-90 transition font-poppins"
             >

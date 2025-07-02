@@ -46,7 +46,9 @@ export default function DealsGrid({
     if (typeof window !== "undefined") {
       sessionStorage.setItem("scrollToResults", "true");
     }
-    router.push(dealCategorySettings?.viewAllUrl || `/search?service=${slug}`);
+    router.push(
+      dealCategorySettings?.viewAllUrl || `/search?service=${slug}#results`
+    );
   };
 
   const getResponsiveCols = () => {

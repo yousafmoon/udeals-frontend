@@ -10,6 +10,7 @@ import ListingsControls from "@/components/ListingsControls";
 import { request } from "graphql-request";
 import { HOMEPAGE_ALL_SECTIONS_QUERY } from "@/lib/queries";
 import { useLayoutEffect } from "react";
+import { usePathname } from "next/navigation";
 
 const endpoint = "https://ujz.cuf.temporary.site/udeals/graphql";
 
@@ -152,6 +153,20 @@ export default function SearchPage() {
   }, [filteredDeals]);
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      const hash = window.location.hash;
+      if (hash === "#results") {
+        setTimeout(() => {
+          const el = document.getElementById("results");
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 300);
+      }
+    }
+  }, [usePathname()]);
+
+  useEffect(() => {
     async function fetchGraphQLData() {
       try {
         const data: GraphQLResponse = await request(
@@ -254,6 +269,7 @@ export default function SearchPage() {
 
       <div
         ref={resultsRef}
+        id="results"
         className="container px-4 sm:px-6 md:px-10 mx-auto py-8"
       >
         <h2 className="text-3xl sm:text-xl md:text-5xl text-center font-medium text-black font-lexend-deca uppercase leading-tight">

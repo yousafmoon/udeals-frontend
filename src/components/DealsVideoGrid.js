@@ -40,7 +40,7 @@ export default function DealsVideoGrid({ dealCategories }) {
               <a
                 href={`${
                   category.dealCategorySettings?.viewAllUrl ||
-                  `/search?service=${category.slug}`
+                  `/search?service=${category.slug}#results`
                 }`}
                 onClick={() => {
                   if (typeof window !== "undefined") {
