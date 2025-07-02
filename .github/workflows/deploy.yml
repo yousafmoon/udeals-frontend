@@ -28,11 +28,11 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Build and Export Static Site
+      - name: Build and Export
         run: |
           npm run build
           npm run export
-           env:
+        env:
           SKIP_LINT: true
 
       - name: Setup SSH
