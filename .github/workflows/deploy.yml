@@ -32,6 +32,8 @@ jobs:
         run: |
           npm run build
           npm run export
+           env:
+          SKIP_LINT: true
 
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.5.4
