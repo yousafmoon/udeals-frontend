@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
   try {
@@ -9,32 +11,24 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: 'All fields are required.' }, { status: 400 });
     }
 
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.yourhost.com',
-      port: 587,
-      secure: false, 
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
-
-    await transporter.sendMail({
-      from: `"${name}" <${process.env.EMAIL_USER}>`, 
-      to: process.env.RECEIVER_EMAIL,                
-      replyTo: email,                                 
+    await resend.emails.send({
+      from: `"${name}" <info@yourdomain.com>`, 
+      to: process.env.CONTACT_RECEIVER_EMAIL || '',  
+      replyTo: email,
       subject: `New Contact: ${concern}`,
       html: `
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Concern:</strong> ${concern}</p>
-        <p><strong>Message:</strong><br>${message}</p>
+        <div style="font-family:sans-serif;line-height:1.6">
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Concern:</strong> ${concern}</p>
+          <p><strong>Message:</strong><br>${message}</p>
+        </div>
       `,
     });
 
     return NextResponse.json({ message: 'Message sent successfully.' });
-  } catch (error) {
-    console.error("Email sending failed:", error);
+  } catch (error: any) {
+    console.error("Resend error:", error);
     return NextResponse.json({ message: 'Failed to send message.' }, { status: 500 });
   }
 }

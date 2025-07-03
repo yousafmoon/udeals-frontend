@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
   try {
@@ -12,30 +14,25 @@ export async function POST(req: Request) {
       );
     }
 
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER, 
-        pass: process.env.EMAIL_PASS,
-      },
+    await resend.emails.send({
+      from: `"${name}" <info@yourdomain.com>`, 
+      to: receiverEmail,                     
+      replyTo: email,
+      subject: subject || "Business Inquiry",
+      html: `
+        <div style="font-family: sans-serif; line-height: 1.6;">
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Phone:</strong> ${phone}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Subject:</strong> ${subject}</p>
+          <p><strong>Message:</strong></p>
+          <p>${message}</p>
+        </div>
+      `,
     });
 
-    await transporter.sendMail({
-      from: `"${name}" <${process.env.EMAIL_USER}>`, 
-      replyTo: email, 
-      to: receiverEmail,
-      subject: subject || "Business Inquiry",
-      text: `
-        Name: ${name}
-        Phone: ${phone}
-        Email: ${email}
-        Subject: ${subject}
-        Message: ${message}
-            `,
-            });
-
     return NextResponse.json({ message: "Inquiry sent to the company!" });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Company contact error:", error);
     return NextResponse.json(
       { message: "Failed to send inquiry." },

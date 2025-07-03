@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
   const { email } = await req.json();
@@ -8,27 +10,17 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: "Email is required." }, { status: 400 });
   }
 
-  const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com", 
-    port: 587,
-    secure: false,
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
-
   try {
-    await transporter.sendMail({
-      from: `"Website Subscription" <${process.env.EMAIL_USER}>`,
-      to: process.env.RECEIVER_EMAIL || process.env.EMAIL_USER, 
+    await resend.emails.send({
+      from: "Subscribe Website <info@yourdomain.com>", 
+      to: process.env.SUBSCRIBE_RECEIVER_EMAIL || '', 
       subject: "New Subscription",
-      text: `A new user subscribed with email: ${email}`,
+      html: `<p>New subscriber: <strong>${email}</strong></p>`,
     });
 
     return NextResponse.json({ message: "Thank you for subscribing!" });
-  } catch (error) {
-    console.error("Subscribe error:", error);
+  } catch (error: any) {
+    console.error("Resend error:", error);
     return NextResponse.json({ message: "Subscription failed." }, { status: 500 });
   }
 }
