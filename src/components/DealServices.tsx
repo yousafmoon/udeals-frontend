@@ -1,8 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect } from "react";
 
 interface DealServiceIcon {
   sourceUrl: string;
@@ -38,20 +36,6 @@ export default function DealServices({ services = [] }: DealServicesProps) {
     (term) => term.dealServices.showOnHomepage === true
   );
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const hash = window.location.hash;
-      if (hash === "#results") {
-        setTimeout(() => {
-          const el = document.getElementById("results");
-          if (el) {
-            el.scrollIntoView({ behavior: "smooth" });
-          }
-        }, 300);
-      }
-    }
-  }, [usePathname()]);
-
   return (
     <div className="relative z-10 w-full px-4">
       <div className="max-w-4xl w-full mx-auto px-2 sm:px-4 mt-8">
@@ -60,6 +44,11 @@ export default function DealServices({ services = [] }: DealServicesProps) {
             <Link
               key={term.id}
               href={`/search?service=${encodeURIComponent(term.name)}#results`}
+              onClick={() => {
+                if (typeof window !== "undefined") {
+                  sessionStorage.setItem("scrollToResults", "true");
+                }
+              }}
               className="flex-shrink-0 md:flex-shrink md:flex-grow-0 flex flex-col items-center justify-center text-center hover:opacity-80 transition min-w-[100px]"
             >
               <div className="w-12 h-12 sm:w-14 sm:h-14 mb-2 bg-white border border-gray-300 rounded-full flex items-center justify-center text-black text-sm font-semibold">

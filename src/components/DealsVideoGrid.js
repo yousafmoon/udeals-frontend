@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function DealsVideoGrid({ dealCategories }) {
   const [activeVideo, setActiveVideo] = useState(null);
@@ -10,7 +11,6 @@ export default function DealsVideoGrid({ dealCategories }) {
     <div className="pt-12 sm:pt-14 md:pt-16">
       {dealCategories.map((category) => (
         <section key={category.slug}>
-          {/* Header */}
           <div className="container px-4 sm:px-6 md:px-10 mx-auto mb-6 text-center">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-medium text-black font-lexend-deca uppercase">
               {category.name}
@@ -18,7 +18,6 @@ export default function DealsVideoGrid({ dealCategories }) {
             <div className="h-[1.5px] bg-logo-color w-full mx-auto mt-4 sm:mt-5 mb-6 sm:mb-8 rounded"></div>
           </div>
 
-          {/* Video Grid */}
           <div className="w-full section-bg py-8 sm:py-10">
             <div className="container px-4 sm:px-6 md:px-10 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
               {category.deals?.nodes?.map((deal, index) => (
@@ -35,18 +34,12 @@ export default function DealsVideoGrid({ dealCategories }) {
               ))}
             </div>
 
-            {/* View All Button */}
             <div className="text-center mt-6 container px-4 sm:px-6 md:px-10 mx-auto">
-              <a
-                href={`${
+              <Link
+                href={
                   category.dealCategorySettings?.viewAllUrl ||
                   `/search?service=${category.slug}#results`
-                }`}
-                onClick={() => {
-                  if (typeof window !== "undefined") {
-                    sessionStorage.setItem("scrollToResults", "true");
-                  }
-                }}
+                }
                 className="inline-flex items-center gap-2 bg-white text-sm sm:text-md px-5 sm:px-6 py-3 sm:py-4 text-black hover:bg-opacity-90 transition font-poppins"
               >
                 {category.dealCategorySettings?.viewAllButton ||
@@ -56,7 +49,7 @@ export default function DealsVideoGrid({ dealCategories }) {
                   alt="forward"
                   className="w-5 h-5"
                 />
-              </a>
+              </Link>
             </div>
           </div>
         </section>

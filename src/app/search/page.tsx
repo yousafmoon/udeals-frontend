@@ -2,7 +2,7 @@
 
 export const dynamic = "force-dynamic";
 
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 import DealListings from "@/components/DealListings";
 import Header from "@/components/Header";
@@ -10,7 +10,6 @@ import ListingsControls from "@/components/ListingsControls";
 import { request } from "graphql-request";
 import { HOMEPAGE_ALL_SECTIONS_QUERY } from "@/lib/queries";
 import { useLayoutEffect } from "react";
-import { usePathname } from "next/navigation";
 
 const endpoint = "https://ujz.cuf.temporary.site/udeals/graphql";
 
@@ -139,32 +138,47 @@ export default function SearchPage() {
     fetchSearchAndBanners();
   }, [urlSearch, urlLocation, urlService]);
 
-  useLayoutEffect(() => {
+  // useLayoutEffect(() => {
+  //   if (
+  //     typeof window !== "undefined" &&
+  //     sessionStorage.getItem("scrollToResults") === "true"
+  //   ) {
+  //     sessionStorage.removeItem("scrollToResults");
+  //     resultsRef.current?.scrollIntoView({
+  //       behavior: "smooth",
+  //       block: "start",
+  //     });
+  //   }
+  // }, [filteredDeals]);
+
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     const hash = window.location.hash;
+  //     if (hash === "#results") {
+  //       setTimeout(() => {
+  //         const el = document.getElementById("results");
+  //         if (el) {
+  //           el.scrollIntoView({ behavior: "smooth" });
+  //         }
+  //       }, 300);
+  //     }
+  //   }
+  // }, [usePathname()]);
+
+  useEffect(() => {
     if (
       typeof window !== "undefined" &&
       sessionStorage.getItem("scrollToResults") === "true"
     ) {
       sessionStorage.removeItem("scrollToResults");
-      resultsRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-  }, [filteredDeals]);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const hash = window.location.hash;
-      if (hash === "#results") {
+      const el = document.getElementById("results");
+      if (el) {
         setTimeout(() => {
-          const el = document.getElementById("results");
-          if (el) {
-            el.scrollIntoView({ behavior: "smooth" });
-          }
+          el.scrollIntoView({ behavior: "smooth" });
         }, 300);
       }
     }
-  }, [usePathname()]);
+  }, [usePathname(), useSearchParams()]);
 
   useEffect(() => {
     async function fetchGraphQLData() {

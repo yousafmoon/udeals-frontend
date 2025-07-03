@@ -34,18 +34,17 @@ export default async function PrivacyPolicy() {
 
   return (
     <>
-      <Header variant="general" options={themeOptions} menuItems={headerMenu} />
+      <Header
+        variant="general"
+        options={themeOptions}
+        menuItems={headerMenu}
+        pageTitle="Privacy Policy"
+      />
 
       <main className="container mx-auto px-10 py-10 custom-page sm:px-5 md:px-10">
-        <div className="mb-16 text-center">
-          <h2 className="text-3xl sm:text-4xl font-medium text-black font-lexend-deca uppercase section-heading-border">
-            Privacy Policy
-          </h2>
-        </div>
-
         {privacyPageContent ? (
           <div
-            className="proseprose-sm sm:prose md:prose-base lg:prose-lg max-w-none font-dmsans"
+            className="proseprose-sm sm:prose md:prose-base lg:prose-lg max-w-none font-dmsans p-7 border-1 border-amber-300"
             dangerouslySetInnerHTML={{ __html: privacyPageContent }}
           />
         ) : (

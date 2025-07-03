@@ -114,7 +114,18 @@ export default async function RootLayout({
       <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
       <body>
-        <Suspense fallback={<div>Loading page...</div>}>{children}</Suspense>
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center h-screen bg-black">
+              <div className="flex flex-col items-center gap-4">
+                <div className="w-10 h-10 border-4 border-b-yellow-400 border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            </div>
+          }
+        >
+          {children}
+        </Suspense>
+
         <ScrollToTopButton />
         <Footer options={themeOptions} menuItems={footerMenu} />
       </body>

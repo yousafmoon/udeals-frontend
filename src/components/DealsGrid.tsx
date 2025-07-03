@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 type Deal = {
   title: string;
@@ -40,16 +39,6 @@ export default function DealsGrid({
   styleType = "default",
 }: DealsGridProps) {
   const isProductStyle = styleType === "product";
-  const router = useRouter();
-
-  const handleViewAllClick = () => {
-    if (typeof window !== "undefined") {
-      sessionStorage.setItem("scrollToResults", "true");
-    }
-    router.push(
-      dealCategorySettings?.viewAllUrl || `/search?service=${slug}#results`
-    );
-  };
 
   const getResponsiveCols = () => {
     switch (columns) {
@@ -122,8 +111,13 @@ export default function DealsGrid({
       </div>
 
       <div className="text-center mt-8">
-        <button
-          onClick={handleViewAllClick}
+        <Link
+          href={dealCategorySettings?.viewAllUrl || `/search?service=${slug}`}
+          onClick={() => {
+            if (typeof window !== "undefined") {
+              sessionStorage.setItem("scrollToResults", "true");
+            }
+          }}
           className="inline-flex items-center cursor-pointer gap-2 section-bg text-md px-6 py-4 text-black hover:bg-opacity-90 transition font-poppins"
         >
           {dealCategorySettings?.viewAllButton || `View All ${title}`}
@@ -132,7 +126,7 @@ export default function DealsGrid({
             alt="forward"
             className="w-5 h-5"
           />
-        </button>
+        </Link>
       </div>
     </section>
   );

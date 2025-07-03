@@ -34,18 +34,17 @@ export default async function ContactUs() {
     themeData.contactUsPage?.homepageContactPageFields?.contactPageContent;
   return (
     <>
-      <Header variant="general" options={themeOptions} menuItems={headerMenu} />
+      <Header
+        variant="general"
+        options={themeOptions}
+        menuItems={headerMenu}
+        pageTitle="Contact Us"
+      />
 
       <main className="container mx-auto px-4 sm:px-6 md:px-10 py-10">
-        <div className="mb-12 text-center">
-          <h2 className="text-3xl sm:text-4xl font-medium text-black font-lexend-deca uppercase section-heading-border">
-            Contact us
-          </h2>
-        </div>
-
         {contactPageContent ? (
           <div
-            className="prose prose-sm sm:prose md:prose-lg max-w-none font-dmsans"
+            className="prose prose-sm sm:prose md:prose-lg max-w-none font-dmsans p-7 border-1 border-amber-300"
             dangerouslySetInnerHTML={{ __html: contactPageContent }}
           />
         ) : (

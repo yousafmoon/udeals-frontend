@@ -65,7 +65,7 @@ export default function Footer({ options, menuItems = [] }: FooterProps) {
   return (
     <footer className="bg-black text-white py-6">
       <div className="container px-10 mx-auto text-left">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-4">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="w-full md:w-1/2 text-center md:text-left">
             {options?.footerLogo?.sourceUrl && (
               <div className="mb-1">
@@ -73,35 +73,35 @@ export default function Footer({ options, menuItems = [] }: FooterProps) {
                   <Image
                     src={options.footerLogo.sourceUrl}
                     alt={options.footerLogo.title || "Footer Logo"}
-                    width={420}
-                    height={70}
-                    className="h-[70px] w-[420px] cursor-pointer"
+                    width={260}
+                    height={53}
+                    className="h-[50px] sm:h-[60px] md:h-[54px] w-auto cursor-pointer"
                   />
                 </Link>
               </div>
             )}
             {options?.copyright && (
               <div
-                className="text-lg text-white-400"
+                className="text-xs sm:text-sm md:text-md text-white-400"
                 dangerouslySetInnerHTML={{ __html: options.copyright }}
               />
             )}
           </div>
 
-          <form onSubmit={handleSubmit} className="w-full md:w-[460px] mt-15">
-            <div className="relative h-[60px]">
+          <form onSubmit={handleSubmit} className="w-full md:w-[400px] mt-15">
+            <div className="relative h-[54px]">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 placeholder="Please enter the email for subscribe"
-                className="w-full h-full pr-[130px] pl-4 text-sm rounded-full text-black placeholder-gray-400 bg-white focus:outline-none"
+                className="w-full h-full pr-[130px] pl-4 text-sm rounded-full text-black placeholder-black bg-white focus:outline-none"
               />
               <button
                 type="submit"
                 disabled={loading}
-                className="absolute top-0 right-0 h-full px-6 rounded-full cursor-pointer bg-logo-color text-black font-semibold text-md"
+                className="absolute top-0 right-0 h-full px-4 rounded-full cursor-pointer bg-logo-color text-black font-semibold text-sm"
               >
                 Subscribe
               </button>

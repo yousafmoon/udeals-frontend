@@ -35,6 +35,7 @@ interface HeaderProps {
     whatsapp?: string;
     email?: string;
   };
+  pageTitle?: string;
 }
 
 export default function Header({
@@ -44,6 +45,7 @@ export default function Header({
   services = [],
   banners = [],
   profileInfo,
+  pageTitle,
 }: HeaderProps) {
   const isCompact = variant === "compact";
   const isProfile = variant === "profile";
@@ -230,45 +232,61 @@ export default function Header({
             </div>
           </>
         ) : isGeneral ? (
-          <div className="flex flex-col items-center text-center pt-10">
-            {options?.headerLogo?.sourceUrl && (
-              <Link href="/">
-                <Image
-                  src={options.headerLogo.sourceUrl}
-                  alt={options.headerLogo.title || "Header Logo"}
-                  width={520}
-                  height={80}
-                  className="cursor-pointer max-w-[280px] sm:max-w-[400px] lg:max-w-[500px] xl:max-w-[450px] mb-2"
-                />
-              </Link>
-            )}
-            {options?.headerSlogan && (
-              <p className="text-base sm:text-lg md:text-xl text-white mb-6">
-                {options.headerSlogan}
-              </p>
-            )}
-            {menuItems?.length > 0 && (
-              <nav className="mt-2">
-                <ul className="flex flex-wrap text-left gap-4 text-sm uppercase text-white">
-                  {menuItems.map((item, index) => (
-                    <li key={index} className="flex items-center gap-4">
-                      <Link
-                        href={
-                          item.url.startsWith("http")
-                            ? new URL(item.url).pathname
-                            : item.url
-                        }
-                        className="hover:underline uppercase text-lg md:text-2xl"
-                      >
-                        {item.label}
-                      </Link>
-                      {index !== menuItems.length - 1 && (
-                        <span className="text-white">|</span>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </nav>
+          <div className="text-white">
+            <div className="flex flex-col lg:flex-row justify-between items-center lg:items-center">
+              <div className="flex flex-col items-center lg:items-start">
+                {options?.headerLogo?.sourceUrl && (
+                  <Link href="/">
+                    <Image
+                      src={options.headerLogo.sourceUrl}
+                      alt={options.headerLogo.title || "Header Logo"}
+                      width={300}
+                      height={80}
+                      className="h-auto w-full sm:max-w-[300px] cursor-pointer"
+                    />
+                  </Link>
+                )}
+                {options?.headerSlogan && (
+                  <p className="text-sm mt-1 text-center lg:text-left">
+                    {options.headerSlogan}
+                  </p>
+                )}
+              </div>
+
+              {menuItems?.length > 0 && (
+                <nav className="mt-4 lg:mt-0">
+                  <ul className="flex flex-wrap justify-center lg:justify-end gap-4 text-sm uppercase">
+                    {menuItems.map((item, index) => (
+                      <li key={index} className="flex items-center gap-4">
+                        <Link
+                          href={
+                            item.url.startsWith("http")
+                              ? new URL(item.url).pathname
+                              : item.url
+                          }
+                          className="hover:underline uppercase text-lg md:text-2xl"
+                        >
+                          {item.label}
+                        </Link>
+                        {index !== menuItems.length - 1 && (
+                          <span className="text-white">|</span>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              )}
+            </div>
+
+            {pageTitle && (
+              <div className="w-full text-center mt-10">
+                <div className="inline-block px-2">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl uppercase font-normal font-alata text-white">
+                    {pageTitle}
+                  </h1>
+                  <div className="h-[2px] bg-logo-color mt-2 w-full"></div>
+                </div>
+              </div>
             )}
           </div>
         ) : (
@@ -279,7 +297,7 @@ export default function Header({
                 alt={options.headerLogo.title || "Header Logo"}
                 width={500}
                 height={60}
-                className="mx-auto h-auto w-full max-w-[320px] sm:max-w-[400px]"
+                className="mx-auto h-auto w-full max-w-[320px] sm:max-w-[450px]"
               />
             )}
             {options?.headerSlogan && (

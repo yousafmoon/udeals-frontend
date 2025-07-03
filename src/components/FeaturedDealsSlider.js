@@ -117,11 +117,16 @@ export default function HomepageDealsSection({ dealCategories }) {
           </div>
 
           <div className="text-center mt-6">
-            <a
+            <Link
               href={
                 category.dealCategorySettings?.viewAllUrl ||
-                `/search?service=${category.slug}#results`
+                `/search?service=${category.slug}`
               }
+              onClick={() => {
+                if (typeof window !== "undefined") {
+                  sessionStorage.setItem("scrollToResults", "true");
+                }
+              }}
               className="inline-flex items-center gap-2 text-sm sm:text-md px-6 py-3 sm:py-4 view-all-button-bg text-black hover:bg-opacity-90 transition font-poppins"
             >
               {category.dealCategorySettings?.viewAllButton ||
@@ -131,7 +136,7 @@ export default function HomepageDealsSection({ dealCategories }) {
                 alt="forward"
                 className="w-5 h-5"
               />
-            </a>
+            </Link>
           </div>
         </section>
       ))}

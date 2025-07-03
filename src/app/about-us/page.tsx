@@ -38,18 +38,17 @@ export default async function AboutUsPage() {
 
   return (
     <>
-      <Header variant="general" options={themeOptions} menuItems={headerMenu} />
+      <Header
+        variant="general"
+        options={themeOptions}
+        menuItems={headerMenu}
+        pageTitle="About Us"
+      />
 
-      <main className="container mx-auto px-4 sm:px-6 md:px-10 py-6 sm:py-10 lg:py-16">
-        <div className="mb-12 sm:mb-16 text-center">
-          <h2 className="text-3xl sm:text-4xl font-medium text-black font-lexend-deca uppercase section-heading-border">
-            About us
-          </h2>
-        </div>
-
+      <main className="container mx-auto px-10 py-10 custom-page sm:px-5 md:px-10">
         {aboutContent ? (
           <div
-            className="prose prose-sm sm:prose md:prose-lg max-w-none custom-page font-dmsans"
+            className="prose prose-sm sm:prose md:prose-lg max-w-none custom-page font-dmsans p-7 border-1 border-amber-300"
             dangerouslySetInnerHTML={{ __html: aboutContent }}
           />
         ) : (
