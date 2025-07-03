@@ -89,7 +89,7 @@ export default function DealsGrid({
               <p className="text-xs text-gray-400 mt-1">
                 {deal?.dealsHomepage?.description}
               </p>
-              <p className="mt-2 font-extrabold text-sm text-logo-color">
+              <p className="mt-2 font-extrabold text-sm logo-color">
                 {deal?.dealsHomepage?.expireOn}
               </p>
               <h5
