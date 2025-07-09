@@ -59,7 +59,7 @@ export default function Header({
 
   return (
     <header
-      className={`relative bg-no-repeat bg-cover w-full text-white ${
+      className={`relative bg-no-repeat bg-center bg-cover w-full text-white ${
         isCompact
           ? "h-[650px]"
           : isProfile

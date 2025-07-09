@@ -55,13 +55,14 @@ export default function ListingBanners({ banners }: ListingBannersProps) {
                   src={banner.imageUrl}
                   alt={banner.title || "Banner"}
                   className="w-full 
-                    h-[220px] 
-                    sm:h-[300px] 
-                    md:h-[360px] 
-                    lg:h-[420px] 
-                    xl:h-[480px] 
-                    object-cover 
-                    rounded-2xl"
+                            h-[220px] 
+                            sm:h-[300px] 
+                            md:h-[360px] 
+                            lg:h-[420px] 
+                            xl:h-[480px] 
+                            object-contain 
+                            sm:object-cover 
+                            rounded-2xl"
                 />
               </a>
             ) : (
@@ -69,13 +70,14 @@ export default function ListingBanners({ banners }: ListingBannersProps) {
                 src={banner.imageUrl}
                 alt={banner.title || "Banner"}
                 className="w-full 
-                  h-[220px] 
-                  sm:h-[300px] 
-                  md:h-[360px] 
-                  lg:h-[420px] 
-                  xl:h-[480px] 
-                  object-cover 
-                  rounded-2xl"
+                   h-[220px] 
+                            sm:h-[280px] 
+                            md:h-[360px] 
+                            lg:h-[420px] 
+                            xl:h-[480px] 
+                            object-contain 
+                            sm:object-cover 
+                            rounded-2xl"
               />
             )}
           </SwiperSlide>
