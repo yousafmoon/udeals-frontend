@@ -71,7 +71,6 @@ export const metadata: Metadata = {
   icons: { icon: "/favicon.ico" },
 };
 
-// Theme options types
 type ThemeOptions = {
   headerBackground?: { sourceUrl: string };
   headerLogo?: { sourceUrl: string; title?: string };
@@ -86,7 +85,6 @@ type GraphQLData = {
   };
 };
 
-// Root layout
 export default async function RootLayout({
   children,
 }: {
