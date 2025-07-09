@@ -20,47 +20,26 @@ export default function ClientHeader({ options }: Props) {
     "default" | "compact" | "profile" | "general"
   >("default");
   const [menuItems, setMenuItems] = useState<any[]>([]);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setVariant(pathname === "/" ? "compact" : "default");
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (pathname === "/") setVariant("compact");
+    else setVariant("default");
   }, [pathname]);
 
   useEffect(() => {
     if (variant === "profile" || variant === "general") {
-      getHeaderMenu().then(setMenuItems);
+      getHeaderMenu().then((items) => setMenuItems(items));
     } else {
       setMenuItems([]);
     }
   }, [variant]);
 
-  return (
-    <header className="bg-white shadow-md p-4">
-      {options?.headerLogo && (
-        <div className="flex items-center gap-2">
-          <img
-            src={options.headerLogo.sourceUrl}
-            alt={options.headerLogo.title || "Logo"}
-            className="h-10"
-          />
-          <span className="text-lg font-bold">{options.headerSlogan}</span>
-        </div>
-      )}
+  if (!isMounted || pathname === "/") return null;
 
-      <div className="text-sm text-gray-500 mt-2">Variant: {variant}</div>
-
-      {menuItems.length > 0 && (
-        <nav className="mt-2">
-          <ul className="flex gap-4">
-            {menuItems.map((item, index) => (
-              <li key={index}>
-                <a href={item.url} className="text-blue-600 hover:underline">
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      )}
-    </header>
-  );
+  return <></>;
 }

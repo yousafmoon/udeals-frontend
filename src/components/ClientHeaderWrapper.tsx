@@ -1,5 +1,7 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import ClientHeader from "./ClientHeader";
 
 export type ThemeOptions = {
@@ -10,10 +12,25 @@ export type ThemeOptions = {
   copyright?: string;
 };
 
-export default function ClientHeaderWrapper({
-  options,
-}: {
-  options: ThemeOptions;
-}) {
-  return <ClientHeader options={options} />;
+export default function ClientHeaderWrapper({}: { options: ThemeOptions }) {
+  const pathname = usePathname();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null;
+
+  if (pathname === "/") return null;
+
+  return (
+    <ClientHeader
+      options={{
+        headerBackground: undefined,
+        headerLogo: undefined,
+        headerSlogan: undefined,
+      }}
+    />
+  );
 }
