@@ -48,7 +48,7 @@ export default async function AboutUsPage() {
       <main className="container mx-auto px-10 py-10 custom-page sm:px-5 md:px-10">
         {aboutContent ? (
           <div
-            className="prose prose-sm sm:prose md:prose-lg max-w-none custom-page font-dmsans p-7 border-1 border-amber-300"
+            className="proseprose-sm sm:prose md:prose-base lg:prose-lg max-w-none font-dmsans p-7 border-1 border-amber-300"
             dangerouslySetInnerHTML={{ __html: aboutContent }}
           />
         ) : (

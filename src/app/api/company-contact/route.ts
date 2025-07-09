@@ -31,7 +31,7 @@ export async function POST(req: Request) {
       `,
     });
 
-    return NextResponse.json({ message: "Inquiry sent to the company!" });
+    return NextResponse.json({ message: "Message has been sent successfully!" });
   } catch (error: any) {
     console.error("Company contact error:", error);
     return NextResponse.json(

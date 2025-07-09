@@ -124,7 +124,7 @@ export default function DealListings({
                 )}
               </div>
 
-              <div className={`p-4 ${layout === "list" ? "sm:w-2/3" : ""}`}>
+              <div className={`p-6 ${layout === "list" ? "sm:w-2/3" : ""}`}>
                 <div className="flex flex-row flex-wrap items-center gap-1">
                   <h3 className="text-md font-bold mb-1 ml-0.5">
                     {deal.title}

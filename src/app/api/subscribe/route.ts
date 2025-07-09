@@ -12,7 +12,7 @@ export async function POST(req: Request) {
 
   try {
     await resend.emails.send({
-      from: "Subscribe Website <info@yourdomain.com>", 
+      from: "Subscribe Website <biz@uaesalondeals.com>", 
       to: process.env.SUBSCRIBE_RECEIVER_EMAIL || '', 
       subject: "New Subscription",
       html: `<p>New subscriber: <strong>${email}</strong></p>`,

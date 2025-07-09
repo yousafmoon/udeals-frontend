@@ -5,11 +5,11 @@ export const dynamic = "force-dynamic";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 import DealListings from "@/components/DealListings";
-import Header from "@/components/Header";
 import ListingsControls from "@/components/ListingsControls";
 import { request } from "graphql-request";
 import { HOMEPAGE_ALL_SECTIONS_QUERY } from "@/lib/queries";
-import { useLayoutEffect } from "react";
+// import { useLayoutEffect } from "react";
+import Header from "@/components/Header";
 
 const endpoint = "https://ujz.cuf.temporary.site/udeals/graphql";
 

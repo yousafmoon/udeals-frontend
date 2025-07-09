@@ -5,8 +5,6 @@ import SearchBar from "./SearchBar";
 import ListingBanners from "./ListingBanners";
 import type { DealServiceItem } from "./SearchBar";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { getHeaderMenu } from "@/lib/getHeaderMenu";
 
 interface Banner {
   id: string;
@@ -44,26 +42,13 @@ export default function Header({
   locations = [],
   services = [],
   banners = [],
+  menuItems = [],
   profileInfo,
   pageTitle,
 }: HeaderProps) {
   const isCompact = variant === "compact";
   const isProfile = variant === "profile";
   const isGeneral = variant === "general";
-
-  const [menuItems, setMenuItems] = useState<
-    { label: string; url: string; target: string }[]
-  >([]);
-
-  useEffect(() => {
-    if (isProfile || isGeneral) {
-      const loadMenu = async () => {
-        const items = await getHeaderMenu();
-        setMenuItems(items);
-      };
-      loadMenu();
-    }
-  }, [isProfile, isGeneral]);
 
   const scrollToAbout = () => {
     const el = document.getElementById("about-us");
@@ -78,10 +63,10 @@ export default function Header({
         isCompact
           ? "h-[650px]"
           : isProfile
-          ? "h-[630px]"
-          : isGeneral
-          ? "h-[300px]"
-          : "h-[550px]"
+            ? "h-[630px]"
+            : isGeneral
+              ? "h-[300px]"
+              : "h-[550px]"
       }`}
       style={{
         backgroundImage: options?.headerBackground?.sourceUrl
@@ -146,27 +131,29 @@ export default function Header({
                 )}
               </div>
 
-              <nav className="mt-4 md:mt-0">
-                <ul className="flex flex-wrap text-left gap-4 text-sm uppercase text-white">
-                  {menuItems.map((item, index) => (
-                    <li key={index} className="flex items-center gap-4">
-                      <Link
-                        href={
-                          item.url.startsWith("http")
-                            ? new URL(item.url).pathname
-                            : item.url
-                        }
-                        className="hover:underline uppercase text-lg md:text-2xl"
-                      >
-                        {item.label}
-                      </Link>
-                      {index !== menuItems.length - 1 && (
-                        <span className="text-white">|</span>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </nav>
+              {menuItems.length > 0 && (
+                <nav className="mt-4 md:mt-0">
+                  <ul className="flex flex-wrap text-left gap-4 text-sm uppercase text-white">
+                    {menuItems.map((item, index) => (
+                      <li key={index} className="flex items-center gap-4">
+                        <Link
+                          href={
+                            item.url.startsWith("http")
+                              ? new URL(item.url).pathname
+                              : item.url
+                          }
+                          className="hover:underline uppercase text-lg md:text-2xl"
+                        >
+                          {item.label}
+                        </Link>
+                        {index !== menuItems.length - 1 && (
+                          <span className="text-white">|</span>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              )}
             </div>
 
             <div className="text-center justify-center relative mt-5">
@@ -253,29 +240,27 @@ export default function Header({
                 )}
               </div>
 
-              {menuItems?.length > 0 && (
-                <nav className="mt-4 lg:mt-0">
-                  <ul className="flex flex-wrap justify-center lg:justify-end gap-4 text-sm uppercase">
-                    {menuItems.map((item, index) => (
-                      <li key={index} className="flex items-center gap-4">
-                        <Link
-                          href={
-                            item.url.startsWith("http")
-                              ? new URL(item.url).pathname
-                              : item.url
-                          }
-                          className="hover:underline uppercase text-lg md:text-2xl"
-                        >
-                          {item.label}
-                        </Link>
-                        {index !== menuItems.length - 1 && (
-                          <span className="text-white">|</span>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
-              )}
+              <nav className="mt-4 lg:mt-0">
+                <ul className="flex flex-wrap justify-center lg:justify-end gap-4 text-sm uppercase">
+                  {menuItems.map((item, index) => (
+                    <li key={index} className="flex items-center gap-4">
+                      <Link
+                        href={
+                          item.url.startsWith("http")
+                            ? new URL(item.url).pathname
+                            : item.url
+                        }
+                        className="hover:underline uppercase text-lg md:text-2xl"
+                      >
+                        {item.label}
+                      </Link>
+                      {index !== menuItems.length - 1 && (
+                        <span className="text-white">|</span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </nav>
             </div>
 
             {pageTitle && (
