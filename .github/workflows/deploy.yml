@@ -9,6 +9,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      SUBSCRIBE_RECEIVER_EMAIL: ${{ secrets.SUBSCRIBE_RECEIVER_EMAIL }}
+      CONTACT_RECEIVER_EMAIL: ${{ secrets.CONTACT_RECEIVER_EMAIL }}
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3

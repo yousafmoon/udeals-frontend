@@ -11,7 +11,7 @@ export async function POST(req: Request) {
 
   try {
     await resend.emails.send({
-      from: "Subscribe Website <biz@uaesalondeals.com>",
+      from: "Subscribe Website <onboarding@resend.dev>",
       to: process.env.SUBSCRIBE_RECEIVER_EMAIL || '',
       subject: "New Subscription",
       html: `<p>New subscriber: <strong>${email}</strong></p>`,
