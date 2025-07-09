@@ -1,9 +1,8 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(req: Request) {
+  const resend = new Resend(process.env.RESEND_API_KEY); 
   const { email } = await req.json();
 
   if (!email) {
@@ -12,8 +11,8 @@ export async function POST(req: Request) {
 
   try {
     await resend.emails.send({
-      from: "Subscribe Website <biz@uaesalondeals.com>", 
-      to: process.env.SUBSCRIBE_RECEIVER_EMAIL || '', 
+      from: "Subscribe Website <biz@uaesalondeals.com>",
+      to: process.env.SUBSCRIBE_RECEIVER_EMAIL || '',
       subject: "New Subscription",
       html: `<p>New subscriber: <strong>${email}</strong></p>`,
     });
