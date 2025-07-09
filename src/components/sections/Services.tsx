@@ -20,7 +20,7 @@ export default function Services({
 
   return (
     <section id="services">
-      <div className="container px-4 sm:px-6 lg:px-10">
+      <div className="container mx-auto text-center px-4 sm:px-6 lg:px-10">
         <div className="mb-16 text-center">
           <h2 className="text-4xl font-medium text-black font-lexend-deca uppercase section-heading-border">
             Services
@@ -86,8 +86,8 @@ export default function Services({
         </div>
       </div>
 
-      <div className="section-bg py-10">
-        <div className="container px-4 sm:px-6 lg:px-10">
+      <div className="section-bg py-10 mx-auto">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-10">
           <h4 className="text-center font-medium text-xl font-lexend-deca">
             Service you want
           </h4>
