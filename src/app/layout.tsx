@@ -1,12 +1,17 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import ClientHeader from "@/components/ClientHeader";
 import Footer from "@/components/Footer";
 import { getFooterMenu } from "@/lib/getFooterMenu";
 import { request } from "graphql-request";
 import { HOMEPAGE_ALL_SECTIONS_QUERY } from "@/lib/queries";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
 import { Suspense } from "react";
+
+import dynamic from "next/dynamic";
+const ClientHeader = dynamic<{ options: ThemeOptions }>(
+  () => import("@/components/ClientHeader"),
+  { ssr: false }
+);
 
 import {
   Montserrat,
@@ -71,6 +76,7 @@ export const metadata: Metadata = {
   icons: { icon: "/favicon.ico" },
 };
 
+// Theme options types
 type ThemeOptions = {
   headerBackground?: { sourceUrl: string };
   headerLogo?: { sourceUrl: string; title?: string };
@@ -85,6 +91,7 @@ type GraphQLData = {
   };
 };
 
+// Root layout
 export default async function RootLayout({
   children,
 }: {
