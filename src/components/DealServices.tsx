@@ -51,7 +51,7 @@ export default function DealServices({ services = [] }: DealServicesProps) {
               }}
               className="flex-shrink-0 md:flex-shrink md:flex-grow-0 flex flex-col items-center justify-center text-center hover:opacity-80 transition min-w-[100px]"
             >
-              <div className="w-12 h-12 sm:w-14 sm:h-14 mb-2 bg-white border border-gray-300 rounded-full flex items-center justify-center text-black text-sm font-semibold">
+              <div className="w-8 h-8 sm:w-12 sm:h-12 mb-2 bg-white border-3 border-gray-400 rounded-full flex items-center justify-center text-black text-sm font-semibold">
                 {term.dealServices?.iconImage?.sourceUrl ? (
                   <img
                     src={term.dealServices.iconImage.sourceUrl}

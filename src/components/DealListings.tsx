@@ -78,7 +78,7 @@ export default function DealListings({
           return (
             <li
               key={deal.id || deal.slug}
-              className={`bg-white rounded-xl shadow-md overflow-hidden ${
+              className={`bg-white rounded-xl shadow-sm overflow-hidden ${
                 layout === "list" ? "flex flex-col sm:flex-row" : ""
               }`}
             >
