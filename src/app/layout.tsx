@@ -7,11 +7,7 @@ import { HOMEPAGE_ALL_SECTIONS_QUERY } from "@/lib/queries";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
 import { Suspense } from "react";
 
-import dynamic from "next/dynamic";
-const ClientHeader = dynamic<{ options: ThemeOptions }>(
-  () => import("@/components/ClientHeader"),
-  { ssr: false }
-);
+import ClientHeaderWrapper from "@/components/ClientHeaderWrapper";
 
 import {
   Montserrat,
@@ -111,7 +107,7 @@ export default async function RootLayout({
         ${marcellus.variable} ${alata.variable} ${questrial.variable} ${dmsans.variable} font-sans antialiased`}
     >
       <body>
-        <ClientHeader options={themeOptions} />
+        <ClientHeaderWrapper options={themeOptions} />
         <Suspense
           fallback={
             <div className="flex items-center justify-center h-screen bg-black">
